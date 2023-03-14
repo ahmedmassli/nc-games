@@ -21,13 +21,15 @@ const ListOfReviews = ({ setCurrentReviewId }) => {
     setCurrentReviewId(review_id);
   };
 
+  //board-game.onrender.com/api/reviews/1/comments
+
   return (
     <main>
       <h2>reviews</h2>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <ul>
+        <ul className="review-section-list">
           {" "}
           {reviews.map((review) => {
             return (
@@ -38,9 +40,12 @@ const ListOfReviews = ({ setCurrentReviewId }) => {
                 }}
               >
                 <li className="review-section">
-                  <h2>{review.title}</h2>
-                  <img src={review.review_img_url}></img>
-                  <h3>by:{review.owner}</h3>
+                  <h3>{review.title}</h3>
+                  <img
+                    src={review.review_img_url}
+                    className="list-images"
+                  ></img>
+                  <h4>by:{review.owner}</h4>
                 </li>
               </div>
             );

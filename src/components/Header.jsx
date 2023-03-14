@@ -1,15 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Header = () => {
-  const navigate = useNavigate();
-
-  const directToHome = () => {
-    navigate("/");
-  };
-
   return (
     <section>
-      <h1 onClick={directToHome}>NC Game</h1>
+      <h1>
+        <Link to="/">NC Game</Link>
+      </h1>
     </section>
   );
 };

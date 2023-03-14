@@ -1,34 +1,31 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import { getReview } from "../utils/api";
+import { getComments } from "../utils/api";
 
-const IndividualReview = ({ currentReviewId }) => {
+const IndividualReview = () => {
   const [currentReview, setCurrentReview] = useState({});
   const [currentReviewComments, setCurrentReviewComments] = useState([]);
   const [isLoadingRev, setIsLoadingRev] = useState(true);
   const [isLoadingComments, setIsLoadingComments] = useState(true);
+  const [votes, setVotes] = useState(0);
 
   const { review_id } = useParams();
 
   useEffect(() => {
-    axios
-      .get(`https://board-game.onrender.com/api/reviews/${review_id}`)
-      .then(({ data }) => {
-        setCurrentReview(data.revData[0]);
-
-        setIsLoadingRev(false);
-      });
-  }, [currentReviewId, review_id]);
+    getReview(review_id).then((reviewdata) => {
+      setCurrentReview(reviewdata);
+      setVotes(reviewdata.votes);
+      setIsLoadingRev(false);
+    });
+  }, [review_id]);
 
   useEffect(() => {
-    axios
-      .get(`https://board-game.onrender.com/api/reviews/${review_id}/comments`)
-      .then(({ data }) => {
-        console.log(data.comments);
-        setCurrentReviewComments(data.comments);
-        setIsLoadingComments(false);
-      });
-  }, [currentReviewId, review_id]);
+    getComments(review_id).then((comData) => {
+      setCurrentReviewComments(comData);
+      setIsLoadingComments(false);
+    });
+  }, [review_id]);
 
   return (
     <main>
@@ -44,11 +41,15 @@ const IndividualReview = ({ currentReviewId }) => {
             src={currentReview.review_img_url}
             alt={currentReview.title}
           ></img>
+          <h3>{currentReview.review_body}</h3>
+          <h3>votes:{currentReview.votes}</h3>
+          <button>upvote</button>
+          <button>downvote</button>
+
           {currentReviewComments.length ? (
             <>
               <h3>Comments</h3>
               <ul className="comment-section">
-                {" "}
                 {currentReviewComments.map((comment) => {
                   return (
                     <div key={comment.comment_id}>

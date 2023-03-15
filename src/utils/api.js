@@ -23,6 +23,26 @@ export const getComments = (review_id) => {
     });
 };
 
+export const postComment = (username, comment, review_id) => {
+  return axios
+    .post(`https://board-game.onrender.com/api/reviews/${review_id}/comments`, {
+      username: `${username}`,
+      body: `${comment}`,
+    })
+    .then((success) => {
+      console.log(success);
+    })
+    .catch((error) => {
+      if (error.response.status === 404) {
+        alert(`request failed as username is not recognised`);
+      } else {
+        alert(`request failed`);
+      }
+
+      console.log(error);
+    });
+};
+
 export const patchVotes = (num, review_id) => {
   return axios
     .patch(`https://board-game.onrender.com/api/reviews/${review_id}`, {
@@ -30,11 +50,10 @@ export const patchVotes = (num, review_id) => {
     })
     .then((success) => {
       console.log(success);
+      alert(`comment posted ╰(*°▽°*)╯`);
     })
     .catch((error) => {
       console.log(error.response.status);
       alert(`request failed`);
     });
 };
-
-("d");

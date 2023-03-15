@@ -2,13 +2,17 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getReview } from "../utils/api";
 import { getComments } from "../utils/api";
+import { postComment } from "../utils/api";
 import { patchVotes } from "../utils/api";
+
 const IndividualReview = () => {
   const [currentReview, setCurrentReview] = useState({});
   const [currentReviewComments, setCurrentReviewComments] = useState([]);
   const [isLoadingRev, setIsLoadingRev] = useState(true);
   const [isLoadingComments, setIsLoadingComments] = useState(true);
   const [votes, setVotes] = useState(0);
+  const [userName, setUserName] = useState("");
+  const [comment, setComment] = useState("");
 
   const { review_id } = useParams();
 
@@ -24,8 +28,30 @@ const IndividualReview = () => {
     getComments(review_id).then((comData) => {
       setCurrentReviewComments(comData);
       setIsLoadingComments(false);
+      console.log(12);
     });
   }, [review_id]);
+
+  const HandleSubmit = (event) => {
+    event.preventDefault();
+    setCurrentReviewComments((currentReviewComments) => [
+      ...currentReviewComments,
+      { body: comment, author: userName },
+    ]);
+    if (userName.length > 0 && comment.length > 0) {
+      postComment(userName, comment, review_id);
+    } else {
+      alert("please fill in both inputs (●ˇ∀ˇ●)");
+    }
+  };
+
+  const handleUsernameInput = (event) => {
+    setUserName(event.target.value);
+  };
+
+  const handleCommentInput = (event) => {
+    setComment(event.target.value);
+  };
 
   const add = () => {
     setVotes(votes + 1);
@@ -60,9 +86,9 @@ const IndividualReview = () => {
             <>
               <h3>Comments</h3>
               <ul className="comment-section">
-                {currentReviewComments.map((comment) => {
+                {currentReviewComments.map((comment, index) => {
                   return (
-                    <div key={comment.comment_id}>
+                    <div key={index}>
                       <li className="each-comment-section">
                         <h4>{comment.body}</h4>
                         <h5>by:{comment.author}</h5>
@@ -75,6 +101,21 @@ const IndividualReview = () => {
           ) : (
             <h3>No Comments (っ °Д °;)っ</h3>
           )}
+          <form onSubmit={HandleSubmit}>
+            <input
+              type="text"
+              placeholder="username"
+              onChange={handleUsernameInput}
+              value={userName}
+            ></input>
+            <input
+              type="text"
+              placeholder="comment"
+              onChange={handleCommentInput}
+              value={comment}
+            ></input>
+            <button type="submit">add comment</button>
+          </form>
         </section>
       )}
     </main>

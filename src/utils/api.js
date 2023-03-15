@@ -36,3 +36,5 @@ export const patchVotes = (num, review_id) => {
       alert(`request failed`);
     });
 };
+
+("d");

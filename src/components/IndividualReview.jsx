@@ -4,6 +4,7 @@ import { getReview } from "../utils/api";
 import { getComments } from "../utils/api";
 import { postComment } from "../utils/api";
 import { patchVotes } from "../utils/api";
+
 const IndividualReview = () => {
   const [currentReview, setCurrentReview] = useState({});
   const [currentReviewComments, setCurrentReviewComments] = useState([]);

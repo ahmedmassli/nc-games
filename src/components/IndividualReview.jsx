@@ -28,12 +28,21 @@ const IndividualReview = () => {
     getComments(review_id).then((comData) => {
       setCurrentReviewComments(comData);
       setIsLoadingComments(false);
+      console.log(12);
     });
   }, [review_id]);
 
   const HandleSubmit = (event) => {
     event.preventDefault();
-    postComment(userName, comment, review_id);
+    setCurrentReviewComments((currentReviewComments) => [
+      ...currentReviewComments,
+      { body: comment, author: userName },
+    ]);
+    if (userName.length > 0 && comment.length > 0) {
+      postComment(userName, comment, review_id);
+    } else {
+      alert("please fill in both inputs (●ˇ∀ˇ●)");
+    }
   };
 
   const handleUsernameInput = (event) => {
@@ -77,9 +86,9 @@ const IndividualReview = () => {
             <>
               <h3>Comments</h3>
               <ul className="comment-section">
-                {currentReviewComments.map((comment) => {
+                {currentReviewComments.map((comment, index) => {
                   return (
-                    <div key={comment.comment_id}>
+                    <div key={index}>
                       <li className="each-comment-section">
                         <h4>{comment.body}</h4>
                         <h5>by:{comment.author}</h5>

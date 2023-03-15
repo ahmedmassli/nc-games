@@ -50,6 +50,7 @@ export const patchVotes = (num, review_id) => {
     })
     .then((success) => {
       console.log(success);
+      alert(`comment posted ╰(*°▽°*)╯`);
     })
     .catch((error) => {
       console.log(error.response.status);

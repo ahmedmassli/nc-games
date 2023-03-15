@@ -39,7 +39,12 @@ export const postComment = (username, comment, review_id) => {
       console.log(success);
     })
     .catch((error) => {
-      console.log(error.response.status);
-      alert(`request failed`);
+      if (error.response.status === 404) {
+        alert(`request failed as username is not recognised`);
+      } else {
+        alert(`request failed`);
+      }
+
+      console.log(error);
     });
 };

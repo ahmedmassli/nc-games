@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getReview } from "../utils/api";
 import { getComments } from "../utils/api";
-
+import { patchVotes } from "../utils/api";
 const IndividualReview = () => {
   const [currentReview, setCurrentReview] = useState({});
   const [currentReviewComments, setCurrentReviewComments] = useState([]);
@@ -27,6 +27,16 @@ const IndividualReview = () => {
     });
   }, [review_id]);
 
+  const add = () => {
+    setVotes(votes + 1);
+    patchVotes(1, review_id);
+  };
+
+  const subtarct = () => {
+    setVotes(votes - 1);
+    patchVotes(-1, review_id);
+  };
+
   return (
     <main>
       <h2>Review of board game {currentReview.review_id}</h2>
@@ -42,9 +52,9 @@ const IndividualReview = () => {
             alt={currentReview.title}
           ></img>
           <h3>{currentReview.review_body}</h3>
-          <h3>votes:{currentReview.votes}</h3>
-          <button>upvote</button>
-          <button>downvote</button>
+          <h3>votes:{votes}</h3>
+          <button onClick={add}>upvote</button>
+          <button onClick={subtarct}>downvote</button>
 
           {currentReviewComments.length ? (
             <>

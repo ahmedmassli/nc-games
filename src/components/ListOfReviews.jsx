@@ -20,7 +20,6 @@ const ListOfReviews = () => {
         <p>Loading...</p>
       ) : (
         <ul className="review-section-list">
-          {" "}
           {reviews.map((review) => {
             return (
               <div key={review.review_id}>

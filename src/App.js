@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import ListOfReviews from "./components/ListOfReviews";
 import { useState } from "react";
 import IndividualReview from "./components/IndividualReview";
+import NotFound from "./components/NotFound";
 
 function App() {
   const [currentReviewId, setCurrentReviewId] = useState(0);
@@ -20,6 +21,7 @@ function App() {
           path="/reviews/:review_id"
           element={<IndividualReview currentReviewId={currentReviewId} />}
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

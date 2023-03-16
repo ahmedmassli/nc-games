@@ -63,62 +63,68 @@ const IndividualReview = () => {
     patchVotes(-1, review_id);
   };
 
-  return (
-    <main>
-      <h2>Review of board game {currentReview.review_id}</h2>
+  if (review_id > 24 || review_id < 1) {
+    return alert("game review does not exist, try one between 1 and 24");
+  } else if (isNaN(review_id)) {
+    return alert("game review does not exist, path invalid");
+  } else {
+    return (
+      <main>
+        <h2>Review of board game {currentReview.review_id}</h2>
 
-      {isLoadingComments && isLoadingRev ? (
-        <p>Loading...</p>
-      ) : (
-        <section className="individual-review-section">
-          <h3 className="individual-review-title">{currentReview.title}</h3>
-          <img
-            className="individual-image"
-            src={currentReview.review_img_url}
-            alt={currentReview.title}
-          ></img>
-          <h3>{currentReview.review_body}</h3>
-          <h3>votes:{votes}</h3>
-          <button onClick={add}>upvote</button>
-          <button onClick={subtarct}>downvote</button>
+        {isLoadingComments && isLoadingRev ? (
+          <p>Loading...</p>
+        ) : (
+          <section className="individual-review-section">
+            <h3 className="individual-review-title">{currentReview.title}</h3>
+            <img
+              className="individual-image"
+              src={currentReview.review_img_url}
+              alt={currentReview.title}
+            ></img>
+            <h3>{currentReview.review_body}</h3>
+            <h3>votes:{votes}</h3>
+            <button onClick={add}>upvote</button>
+            <button onClick={subtarct}>downvote</button>
 
-          {currentReviewComments.length ? (
-            <>
-              <h3>Comments</h3>
-              <ul className="comment-section">
-                {currentReviewComments.map((comment, index) => {
-                  return (
-                    <div key={index}>
-                      <li className="each-comment-section">
-                        <h4>{comment.body}</h4>
-                        <h5>by:{comment.author}</h5>
-                      </li>
-                    </div>
-                  );
-                })}
-              </ul>
-            </>
-          ) : (
-            <h3>No Comments (っ °Д °;)っ</h3>
-          )}
-          <form onSubmit={HandleSubmit}>
-            <input
-              type="text"
-              placeholder="username"
-              onChange={handleUsernameInput}
-              value={userName}
-            ></input>
-            <input
-              type="text"
-              placeholder="comment"
-              onChange={handleCommentInput}
-              value={comment}
-            ></input>
-            <button type="submit">add comment</button>
-          </form>
-        </section>
-      )}
-    </main>
-  );
+            {currentReviewComments.length ? (
+              <>
+                <h3>Comments</h3>
+                <ul className="comment-section">
+                  {currentReviewComments.map((comment, index) => {
+                    return (
+                      <div key={index}>
+                        <li className="each-comment-section">
+                          <h4>{comment.body}</h4>
+                          <h5>by:{comment.author}</h5>
+                        </li>
+                      </div>
+                    );
+                  })}
+                </ul>
+              </>
+            ) : (
+              <h3>No Comments (っ °Д °;)っ</h3>
+            )}
+            <form onSubmit={HandleSubmit}>
+              <input
+                type="text"
+                placeholder="username"
+                onChange={handleUsernameInput}
+                value={userName}
+              ></input>
+              <input
+                type="text"
+                placeholder="comment"
+                onChange={handleCommentInput}
+                value={comment}
+              ></input>
+              <button type="submit">add comment</button>
+            </form>
+          </section>
+        )}
+      </main>
+    );
+  }
 };
 export default IndividualReview;

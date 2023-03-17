@@ -5,22 +5,22 @@ import ListOfReviews from "./components/ListOfReviews";
 import { useState } from "react";
 import IndividualReview from "./components/IndividualReview";
 import NotFound from "./components/NotFound";
+import FilterCategory from "./components/FilterCategory";
 
 function App() {
-  const [currentReviewId, setCurrentReviewId] = useState(0);
+  const [reviewsDisplayed, setReviewsDisplayed] = useState("");
 
   return (
     <div className="App">
       <Header />
+      <FilterCategory setReviewsDisplayed={setReviewsDisplayed} />
       <Routes>
         <Route
           path="/"
-          element={<ListOfReviews setCurrentReviewId={setCurrentReviewId} />}
+          element={<ListOfReviews reviewsDisplayed={reviewsDisplayed} />}
         />
-        <Route
-          path="/reviews/:review_id"
-          element={<IndividualReview currentReviewId={currentReviewId} />}
-        />
+        <Route path="/category/:category_name" element={<ListOfReviews />} />
+        <Route path="/reviews/:review_id" element={<IndividualReview />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

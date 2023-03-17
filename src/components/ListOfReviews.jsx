@@ -1,17 +1,34 @@
 import { useEffect, useState } from "react";
 import { getReviews } from "../utils/api";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const ListOfReviews = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [reviews, setReviews] = useState([]);
+  const { category_name } = useParams();
+  console.log(category_name, "here");
 
   useEffect(() => {
-    getReviews().then((reviewdata) => {
-      setReviews(reviewdata);
-      setIsLoading(false);
-    });
-  }, []);
+    if (!category_name) {
+      getReviews().then((reviewdata) => {
+        console.log(reviewdata);
+        setReviews(reviewdata);
+        setIsLoading(false);
+      });
+    } else {
+      axios
+        .get(
+          `https://board-game.onrender.com/api/reviews/?category=${category_name}`
+        )
+        .then((data) => {
+          console.log(data.data.revData);
+          setReviews(data.data.revData);
+          setIsLoading(false);
+        });
+    }
+  }, [category_name]);
 
   return (
     <main>
@@ -27,6 +44,7 @@ const ListOfReviews = () => {
                   <li className="review-section">
                     <h3>{review.title}</h3>
                     <img
+                      alt="pic for the game"
                       src={review.review_img_url}
                       className="list-images"
                     ></img>

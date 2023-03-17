@@ -57,3 +57,25 @@ export const patchVotes = (num, review_id) => {
       alert(`request failed`);
     });
 };
+
+export const getRevs = (category_name) => {
+  return axios.get(
+    `https://board-game.onrender.com/api/reviews/?category=${category_name}`
+  );
+};
+
+export const getReviewsBySP = (category, sort_by, order) => {
+  if (category && sort_by && order) {
+    return axios.get(
+      `https://board-game.onrender.com/api/reviews/?category=${category}&sort_by=${sort_by}&order=${order}`
+    );
+  } else if (category && sort_by) {
+    return axios.get(
+      `https://board-game.onrender.com/api/reviews/?category=${category}&sort_by=${sort_by}`
+    );
+  } else {
+    return axios.get(
+      `https://board-game.onrender.com/api/reviews/?category=${category}`
+    );
+  }
+};

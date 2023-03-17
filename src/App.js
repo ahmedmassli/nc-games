@@ -6,6 +6,7 @@ import { useState } from "react";
 import IndividualReview from "./components/IndividualReview";
 import NotFound from "./components/NotFound";
 import FilterCategory from "./components/FilterCategory";
+import SortReviews from "./components/SortReviews";
 
 function App() {
   const [reviewsDisplayed, setReviewsDisplayed] = useState("");
@@ -14,11 +15,9 @@ function App() {
     <div className="App">
       <Header />
       <FilterCategory setReviewsDisplayed={setReviewsDisplayed} />
+      <SortReviews setReviewsDisplayed={setReviewsDisplayed} />
       <Routes>
-        <Route
-          path="/"
-          element={<ListOfReviews reviewsDisplayed={reviewsDisplayed} />}
-        />
+        <Route path="/" element={<ListOfReviews />} />
         <Route path="/category/:category_name" element={<ListOfReviews />} />
         <Route path="/reviews/:review_id" element={<IndividualReview />} />
         <Route path="*" element={<NotFound />} />

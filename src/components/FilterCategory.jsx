@@ -3,10 +3,13 @@ import { useNavigate } from "react-router-dom";
 
 const FilterCategory = ({ setReviewsDisplayed }) => {
   const navigate = useNavigate();
+
   const [dropdown, setDropDown] = useState("");
+
   const HandleSelect = (event) => {
     setDropDown(event.target.value);
   };
+
   const onsubmit = (event) => {
     event.preventDefault();
     setReviewsDisplayed(dropdown);

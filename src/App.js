@@ -17,7 +17,11 @@ function App() {
       <FilterCategory setReviewsDisplayed={setReviewsDisplayed} />
       <SortReviews setReviewsDisplayed={setReviewsDisplayed} />
       <Routes>
-        <Route path="/" element={<ListOfReviews />} />
+        <Route
+          path="/"
+          reviewsDisplayed={reviewsDisplayed}
+          element={<ListOfReviews />}
+        />
         <Route path="/category/:category_name" element={<ListOfReviews />} />
         <Route path="/reviews/:review_id" element={<IndividualReview />} />
         <Route path="*" element={<NotFound />} />

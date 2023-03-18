@@ -32,7 +32,7 @@ const SortReviews = ({ setReviewsDisplayed }) => {
           navigate(`/?category=${dropdownCat}&sort_by=${dropdownSort}`);
         } else {
           navigate(
-            `/?category=${dropdownCat}&sort_by=${dropdownSort}&dropdownOrder=${dropdownOrder}`
+            `/?category=${dropdownCat}&sort_by=${dropdownSort}&order=${dropdownOrder}`
           );
         }
       }
@@ -54,15 +54,15 @@ const SortReviews = ({ setReviewsDisplayed }) => {
       <label htmlFor="sort_by">sort_by</label>
       <select onChange={HandleSelectSort}>
         <option value={""}></option>
-        <option value={"date"}>date</option>
+        <option value={"created_at"}>date</option>
         <option value={"comment_count"}>comment_count</option>
         <option value={"votes"}>votes</option>
       </select>
       <label htmlFor="order">order</label>
       <select onChange={HandleSelectOrder}>
         <option value={""}></option>
-        <option value={"ASC"}>ASC</option>
-        <option value={"DESC"}>DESC</option>
+        <option value={"ASC"}>ascending</option>
+        <option value={"DESC"}>descending</option>
       </select>
       <button type="submit">Submit</button>
     </form>

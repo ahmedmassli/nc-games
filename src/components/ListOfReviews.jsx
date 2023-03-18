@@ -3,31 +3,28 @@ import { getReviews } from "../utils/api";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
-import { getRevs } from "../utils/api";
 import { getReviewsBySP } from "../utils/api";
 
 const ListOfReviews = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [reviews, setReviews] = useState([]);
   const { category_name } = useParams();
+  /* eslint-disable no-unused-vars */
   let [searchParams, setSearchParams] = useSearchParams();
-
-  console.log(searchParams.get("category"));
-  console.log(searchParams.get("order"));
-  console.log(searchParams.get("sort_by"));
-
+  /* eslint-enable no-unused-vars */
   let category = searchParams.get("category");
   let order = searchParams.get("order");
   let sort_by = searchParams.get("sort_by");
 
-  if (category) {
-  }
-
   useEffect(() => {
     if (category) {
       getReviewsBySP(category, sort_by, order).then((rdata) => {
-        console.log(rdata.data.revData);
         setReviews(rdata.data.revData);
+        setIsLoading(false);
+      });
+    } else {
+      getReviews().then((reviewdata) => {
+        setReviews(reviewdata);
         setIsLoading(false);
       });
     }
@@ -40,7 +37,7 @@ const ListOfReviews = () => {
         setIsLoading(false);
       });
     } else {
-      getRevs(category_name).then((data) => {
+      getReviewsBySP(category_name).then((data) => {
         setReviews(data.data.revData);
         setIsLoading(false);
       });

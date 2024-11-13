@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import { getReviewsBySP } from "../utils/api";
+import "../styles/ListOfReviews.css";
 
 const ListOfReviews = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -46,7 +47,7 @@ const ListOfReviews = () => {
 
   return (
     <main>
-      <h2>reviews</h2>
+      <h2>Board Game Reviews</h2>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
@@ -56,13 +57,15 @@ const ListOfReviews = () => {
               <div key={review.review_id}>
                 <Link to={`/reviews/${review.review_id}`}>
                   <li className="review-section">
-                    <h3>{review.title}</h3>
                     <img
                       alt="pic for the game"
                       src={review.review_img_url}
                       className="list-images"
                     ></img>
-                    <h4>by:{review.owner}</h4>
+                    <div className="review-section-title">
+                      <h3>{review.title}</h3>
+                    </div>
+                    <h4 class="centered-item">by:{review.owner}</h4>
                   </li>
                 </Link>
               </div>

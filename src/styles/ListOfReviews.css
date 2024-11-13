@@ -1,0 +1,43 @@
+.list-images {
+  width: 22vw;
+  height: 17vw;
+  max-width: 200px;
+  max-height: 200px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.review-section-list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+}
+.review-section {
+  cursor: pointer;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background-color: #50d5b3;
+  margin: 10px;
+}
+
+.centered-item {
+  margin-left: auto; /* Pushes to center */
+  margin-right: auto; /* Centers the last item */
+  text-align: center; /* Center text within the element */
+}
+
+.review-section-title {
+  max-width: 200px; /* Set the maximum width */
+  word-wrap: break-word; /* Breaks long words */
+  white-space: normal; /* Allows wrapping */
+}
+
+.review-section:hover {
+  background-color: #378e78;
+}
+
+.individual-review-title {
+  font-size: 2vw;
+}

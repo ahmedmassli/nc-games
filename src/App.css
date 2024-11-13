@@ -45,37 +45,12 @@ h1:hover {
   color: #30727c;
 }
 
-.list-images {
-  width: 22vw;
-  height: 17vw;
-  max-width: 200px;
-  max-height: 200px;
-}
-
 .individual-image {
   width: 30vw;
   height: 30vw;
   padding-left: 34vw;
 }
 
-.review-section-list {
-  display: flex;
-  flex-wrap: wrap;
-  list-style-type: none;
-}
-.review-section {
-  cursor: pointer;
-
-  background-color: #50d5b3;
-  margin: 10px;
-  padding-left: 1vw;
-  padding-right: 1vw;
-  padding-bottom: 1px;
-}
-
-.review-section:hover {
-  background-color: #378e78;
-}
 .individual-review-section {
   background-color: #50d5b3;
   margin: 10px;
@@ -97,4 +72,13 @@ h1:hover {
 
 .individual-review-title {
   font-size: 2vw;
+}
+
+a {
+  color: inherit; /* Inherits color from the parent or specify a different color */
+  text-decoration: none; /* Removes underline */
+}
+
+a:visited {
+  color: inherit; /* Ensures visited links don’t change color */
 }

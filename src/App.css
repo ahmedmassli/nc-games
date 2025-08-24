@@ -1,18 +1,42 @@
+.App {
+  background-color: antiquewhite;
+}
+
 h1 {
   cursor: pointer;
   margin: auto;
-  background-color: #50d5b3;
   padding: 50px;
   margin-bottom: 25px;
   font-size: 7vw;
   text-align: center;
-  color: #073450;
+  color: #000000;
+  font-size: 35px; /* Adjust as needed */
+  font-family: "Inter", sans-serif; /* Apply the Inter font */
+  letter-spacing: -0.015em; /* Equivalent to tracking-tight */
+  text-decoration: none; /* Ensure no underline on links */
 }
 
 h2 {
   font-size: 5vw;
   text-align: center;
-  color: #073450;
+  color: #5c4033;
+  font-size: 23px; /* Adjust as needed */
+  font-weight: 500; /* Medium weight */
+  margin-top: 0; /* Top margin */
+  font-family: "Inter", sans-serif; /* Apply the Inter font */
+  letter-spacing: -0.015em; /* Equivalent to tracking-tight */
+  text-decoration: none; /* Ensure no underline on links */
+}
+
+h3 {
+  font-size: 15px; /* Size of the section content text */
+  line-height: 1.6; /* Line height for better readability */
+  margin-bottom: 20px; /* Space below the paragraphs */
+  color: #5c4033;
+  font-family: "Inter", sans-serif; /* Apply the Inter font */
+  letter-spacing: -0.015em; /* Equivalent to tracking-tight */
+  text-decoration: none; /* Ensure no underline on links */
+  font-weight: 400; /* Thin */
 }
 
 @media screen and (min-width: 1000px) {
@@ -39,10 +63,6 @@ h4 {
 }
 h5 {
   font-size: 0.5vw;
-}
-
-h1:hover {
-  color: #30727c;
 }
 
 .individual-image {

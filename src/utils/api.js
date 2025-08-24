@@ -1,23 +1,25 @@
 import axios from "axios";
+
+// Use the environment variable for the base URL
+const apiUrl = process.env.REACT_APP_API_URL;
+
 export const getReviews = () => {
   return axios
-    .get("https://board-game.onrender.com/api/reviews")
+    .get(`${apiUrl}/api/reviews`) // Use the dynamic URL
     .then(({ data }) => {
       return data.revData;
     });
 };
 
 export const getReview = (review_id) => {
-  return axios
-    .get(`https://board-game.onrender.com/api/reviews/${review_id}`)
-    .then(({ data }) => {
-      return data.revData[0];
-    });
+  return axios.get(`${apiUrl}/api/reviews/${review_id}`).then(({ data }) => {
+    return data.revData[0];
+  });
 };
 
 export const getComments = (review_id) => {
   return axios
-    .get(`https://board-game.onrender.com/api/reviews/${review_id}/comments`)
+    .get(`${apiUrl}/api/reviews/${review_id}/comments`)
     .then(({ data }) => {
       return data.comments;
     });
@@ -25,7 +27,7 @@ export const getComments = (review_id) => {
 
 export const postComment = (username, comment, review_id) => {
   return axios
-    .post(`https://board-game.onrender.com/api/reviews/${review_id}/comments`, {
+    .post(`${apiUrl}/api/reviews/${review_id}/comments`, {
       username: `${username}`,
       body: `${comment}`,
     })
@@ -45,7 +47,7 @@ export const postComment = (username, comment, review_id) => {
 
 export const patchVotes = (num, review_id) => {
   return axios
-    .patch(`https://board-game.onrender.com/api/reviews/${review_id}`, {
+    .patch(`${apiUrl}/api/reviews/${review_id}`, {
       inc_votes: num,
     })
     .then((success) => {
@@ -59,23 +61,19 @@ export const patchVotes = (num, review_id) => {
 };
 
 export const getRevs = (category_name) => {
-  return axios.get(
-    `https://board-game.onrender.com/api/reviews/?category=${category_name}`
-  );
+  return axios.get(`${apiUrl}/api/reviews/?category=${category_name}`);
 };
 
 export const getReviewsBySP = (category, sort_by, order) => {
   if (category && sort_by && order) {
     return axios.get(
-      `https://board-game.onrender.com/api/reviews/?category=${category}&sort_by=${sort_by}&order=${order}`
+      `${apiUrl}/api/reviews/?category=${category}&sort_by=${sort_by}&order=${order}`
     );
   } else if (category && sort_by) {
     return axios.get(
-      `https://board-game.onrender.com/api/reviews/?category=${category}&sort_by=${sort_by}`
+      `${apiUrl}/api/reviews/?category=${category}&sort_by=${sort_by}`
     );
   } else {
-    return axios.get(
-      `https://board-game.onrender.com/api/reviews/?category=${category}`
-    );
+    return axios.get(`${apiUrl}/api/reviews/?category=${category}`);
   }
 };

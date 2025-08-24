@@ -1,0 +1,12 @@
+.custom-heading-h1 {
+  font-size: 50px; /* Adjust as needed */
+  font-family: "Inter", sans-serif; /* Apply the Inter font */
+  letter-spacing: -0.015em; /* Equivalent to tracking-tight */
+  text-decoration: none; /* Ensure no underline on links */
+  color: #5c4033;
+  background-image: url("../assets/pictures/cartoon-color-board-games-different.webp");
+}
+
+.custom-heading-h1:hover {
+  color: #64ff5c;
+}

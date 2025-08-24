@@ -18,7 +18,7 @@
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  background-color: #50d5b3;
+  background-color: #c4a484;
   margin: 10px;
 }
 
@@ -35,7 +35,8 @@
 }
 
 .review-section:hover {
-  background-color: #378e78;
+  background-color: #8cff86;
+  transform: scale(1.05);
 }
 
 .individual-review-title {

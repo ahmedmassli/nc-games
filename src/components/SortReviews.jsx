@@ -51,11 +51,11 @@ const SortReviews = ({ setReviewsDisplayed }) => {
         <option value={"push-your-luck"}>push-your-luck</option>
         <option value={"roll-and-write"}>roll-and-write</option>
       </select>
-      <label htmlFor="sort_by">sort_by</label>
+      <label htmlFor="sort_by">sort by</label>
       <select onChange={HandleSelectSort}>
         <option value={""}></option>
         <option value={"created_at"}>date</option>
-        <option value={"comment_count"}>comment_count</option>
+        <option value={"comment_count"}>comment count</option>
         <option value={"votes"}>votes</option>
       </select>
       <label htmlFor="order">order</label>

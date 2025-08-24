@@ -49,7 +49,7 @@ const ListOfReviews = () => {
     <main>
       <h2>Board Game Reviews</h2>
       {isLoading ? (
-        <p>Loading...</p>
+        <p>Loading... ヾ(＠⌒ー⌒＠)ノ</p>
       ) : (
         <ul className="review-section-list">
           {reviews.map((review) => {

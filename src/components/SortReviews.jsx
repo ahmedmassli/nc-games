@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../styles/SortReviews.css";
 
 const SortReviews = ({ setReviewsDisplayed }) => {
   const navigate = useNavigate();
@@ -8,63 +9,67 @@ const SortReviews = ({ setReviewsDisplayed }) => {
   const [dropdownSort, setDropDownSort] = useState("");
   const [dropdownOrder, setDropDownOrder] = useState("");
 
-  const HandleSelectCat = (event) => {
-    setDropDownCat(event.target.value);
-  };
-  const HandleSelectSort = (event) => {
-    setDropDownSort(event.target.value);
-  };
-
-  const HandleSelectOrder = (event) => {
-    setDropDownOrder(event.target.value);
-  };
+  const HandleSelectCat = (event) => setDropDownCat(event.target.value);
+  const HandleSelectSort = (event) => setDropDownSort(event.target.value);
+  const HandleSelectOrder = (event) => setDropDownOrder(event.target.value);
 
   const onsubmit = (event) => {
     event.preventDefault();
     setReviewsDisplayed(dropdownCat);
-    if (dropdownCat === "") {
+
+    if (!dropdownCat) {
       navigate(`/`);
+    } else if (!dropdownSort) {
+      navigate(`/?category=${dropdownCat}`);
+    } else if (!dropdownOrder) {
+      navigate(`/?category=${dropdownCat}&sort_by=${dropdownSort}`);
     } else {
-      if (dropdownSort === "") {
-        navigate(`/?category=${dropdownCat}`);
-      } else {
-        if (dropdownOrder === "") {
-          navigate(`/?category=${dropdownCat}&sort_by=${dropdownSort}`);
-        } else {
-          navigate(
-            `/?category=${dropdownCat}&sort_by=${dropdownSort}&order=${dropdownOrder}`
-          );
-        }
-      }
+      navigate(
+        `/?category=${dropdownCat}&sort_by=${dropdownSort}&order=${dropdownOrder}`
+      );
     }
   };
+
   return (
-    <form onSubmit={onsubmit} className="category-section">
-      <label htmlFor="choose Category">Category</label>
-      <select onChange={HandleSelectCat}>
-        <option value={""}>All</option>
-        <option value={"hidden-roles"}>hidden-roles</option>
-        <option value={"dexterity"}>dexterity</option>
-        <option value={"strategy"}>strategy</option>
-        <option value={"deck-building"}>deck-building</option>
-        <option value={"engine-building"}>engine-building</option>
-        <option value={"push-your-luck"}>push-your-luck</option>
-        <option value={"roll-and-write"}>roll-and-write</option>
-      </select>
-      <label htmlFor="sort_by">sort by</label>
-      <select onChange={HandleSelectSort}>
-        <option value={""}></option>
-        <option value={"created_at"}>date</option>
-        <option value={"comment_count"}>comment count</option>
-        <option value={"votes"}>votes</option>
-      </select>
-      <label htmlFor="order">order</label>
-      <select onChange={HandleSelectOrder}>
-        <option value={""}></option>
-        <option value={"ASC"}>ascending</option>
-        <option value={"DESC"}>descending</option>
-      </select>
-      <button type="submit">Submit</button>
+    <form className="filters" onSubmit={onsubmit}>
+      <div className="filters">
+        <select onChange={HandleSelectCat}>
+          <option value="" disabled selected>
+            Select Category
+          </option>
+          <option value="All">All</option>
+          <option value="hidden-roles">Hidden Roles</option>
+          <option value="dexterity">Dexterity</option>
+          <option value="strategy">Strategy</option>
+          <option value="deck-building">Deck-Building</option>
+          <option value="engine-building">Engine-Building</option>
+          <option value="push-your-luck">Push Your Luck</option>
+          <option value="roll-and-write">Roll & Write</option>
+        </select>
+      </div>
+
+      <div className="filters">
+        <select id="sort_by" onChange={HandleSelectSort}>
+          <option value="" disabled selected>
+            Select Sort by
+          </option>
+          <option value="created_at">Date</option>
+          <option value="comment_count">Comment Count</option>
+          <option value="votes">Votes</option>
+        </select>
+      </div>
+
+      <div className="filters">
+        <select id="order" onChange={HandleSelectOrder}>
+          <option value="" disabled selected>
+            Select Order
+          </option>
+          <option value="ASC">Ascending</option>
+          <option value="DESC">Descending</option>
+        </select>
+      </div>
+
+      <button type="submit">Apply</button>
     </form>
   );
 };

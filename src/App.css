@@ -1,42 +1,54 @@
-.App {
+html {
+  /* background-image: url("./assets/pictures/cartoon-color-board-games-different.webp");
+  background-size: 800px 500px; */
   background-color: antiquewhite;
 }
 
 h1 {
   cursor: pointer;
   margin: auto;
-  padding: 50px;
-  margin-bottom: 25px;
+  padding: 30px;
   font-size: 7vw;
   text-align: center;
-  color: #000000;
   font-size: 35px; /* Adjust as needed */
   font-family: "Inter", sans-serif; /* Apply the Inter font */
   letter-spacing: -0.015em; /* Equivalent to tracking-tight */
   text-decoration: none; /* Ensure no underline on links */
+  color: #5c4033;
 }
 
 h2 {
   font-size: 5vw;
   text-align: center;
-  color: #5c4033;
   font-size: 23px; /* Adjust as needed */
   font-weight: 500; /* Medium weight */
-  margin-top: 0; /* Top margin */
+  margin-top: 20px; /* Top margin */
   font-family: "Inter", sans-serif; /* Apply the Inter font */
   letter-spacing: -0.015em; /* Equivalent to tracking-tight */
   text-decoration: none; /* Ensure no underline on links */
+  color: #5c4033;
 }
 
 h3 {
   font-size: 15px; /* Size of the section content text */
   line-height: 1.6; /* Line height for better readability */
   margin-bottom: 20px; /* Space below the paragraphs */
-  color: #5c4033;
   font-family: "Inter", sans-serif; /* Apply the Inter font */
   letter-spacing: -0.015em; /* Equivalent to tracking-tight */
   text-decoration: none; /* Ensure no underline on links */
   font-weight: 400; /* Thin */
+  color: #5c4033;
+}
+
+h4 {
+  font-size: 12px; /* Size of the section content text */
+  line-height: 1.6; /* Line height for better readability */
+  margin-bottom: 20px; /* Space below the paragraphs */
+  font-family: "Inter", sans-serif; /* Apply the Inter font */
+  letter-spacing: -0.015em; /* Equivalent to tracking-tight */
+  text-decoration: none; /* Ensure no underline on links */
+  font-weight: 400; /* Thin */
+  color: #5c4033;
 }
 
 @media screen and (min-width: 1000px) {
@@ -94,11 +106,11 @@ h5 {
   font-size: 2vw;
 }
 
-a {
-  color: inherit; /* Inherits color from the parent or specify a different color */
-  text-decoration: none; /* Removes underline */
+a:visited {
+  color: inherit;
 }
 
-a:visited {
-  color: inherit; /* Ensures visited links don’t change color */
+a {
+  color: inherit;
+  text-decoration: none; /* Removes underline */
 }

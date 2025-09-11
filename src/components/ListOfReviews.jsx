@@ -49,7 +49,7 @@ const ListOfReviews = () => {
     <main>
       <h2>Board Game Reviews</h2>
       {isLoading ? (
-        <p>Loading... ヾ(＠⌒ー⌒＠)ノ</p>
+        <h1>Loading... ヾ(＠⌒ー⌒＠)ノ</h1>
       ) : (
         <ul className="review-section-list">
           {reviews.map((review) => {
@@ -66,6 +66,17 @@ const ListOfReviews = () => {
                       <h3>{review.title}</h3>
                     </div>
                     <h4 class="centered-item">by:{review.owner}</h4>
+                    <h4 class="centered-item">votes:{review.votes}</h4>
+                    <h4 class="centered-item">
+                      date:{new Date(review.created_at).getDate()}
+                      {"/"}
+                      {new Date(review.created_at).getMonth() + 1}
+                      {"/"}
+                      {new Date(review.created_at).getFullYear()}
+                    </h4>
+                    <h4 class="centered-item">
+                      comments:{review.comment_count}
+                    </h4>
                   </li>
                 </Link>
               </div>

@@ -5,7 +5,6 @@ import ListOfReviews from "./components/ListOfReviews";
 import { useState } from "react";
 import IndividualReview from "./components/IndividualReview";
 import NotFound from "./components/NotFound";
-import FilterCategory from "./components/FilterCategory";
 import SortReviews from "./components/SortReviews";
 
 function App() {
@@ -13,8 +12,10 @@ function App() {
 
   return (
     <div className="App">
+      <head>
+        <script src="https://cdn.tailwindcss.com"></script>
+      </head>
       <Header />
-      <FilterCategory setReviewsDisplayed={setReviewsDisplayed} />
       <SortReviews setReviewsDisplayed={setReviewsDisplayed} />
       <Routes>
         <Route

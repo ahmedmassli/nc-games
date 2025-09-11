@@ -4,8 +4,10 @@ import "../styles/Header.css";
 const Header = () => {
   return (
     <section>
-      <h1 className="custom-heading-h1">
-        <Link to="/">NC Game</Link>
+      <h1>
+        <Link className="custom-heading-h1" to="/">
+          NC Game
+        </Link>
       </h1>
     </section>
   );

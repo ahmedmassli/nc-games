@@ -1,0 +1,31 @@
+select {
+  display: inline-block;
+  background-color: #c4a484;
+  border-color: #c4a484;
+  color: #5c4033;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  padding: 0.625rem;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem; /* space between filters */
+  flex-wrap: wrap; /* stack on small screens */
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* space between label and select */
+}
+
+button {
+  background-color: #c4a484;
+  color: #5c4033;
+  border-radius: 0.5rem;
+}
+
+form {
+  justify-content: center;
+}

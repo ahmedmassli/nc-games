@@ -24,6 +24,7 @@ button {
   background-color: #c4a484;
   color: #5c4033;
   border-radius: 0.5rem;
+  width: 60px;
 }
 
 form {

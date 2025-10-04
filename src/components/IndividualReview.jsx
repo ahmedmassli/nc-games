@@ -4,6 +4,7 @@ import { getReview } from "../utils/api";
 import { getComments } from "../utils/api";
 import { postComment } from "../utils/api";
 import { patchVotes } from "../utils/api";
+import "../styles/IndividualReview.css";
 
 const IndividualReview = () => {
   const [currentReview, setCurrentReview] = useState({});
@@ -82,10 +83,9 @@ const IndividualReview = () => {
               src={currentReview.review_img_url}
               alt={currentReview.title}
             ></img>
-            <h3>{currentReview.review_body}</h3>
-            <h3>votes:{votes}</h3>
-            <button onClick={add}>upvote</button>
-            <button onClick={subtarct}>downvote</button>
+            <h3 className="individual-review-body">
+              {currentReview.review_body}
+            </h3>
 
             {currentReviewComments.length ? (
               <>
@@ -95,32 +95,62 @@ const IndividualReview = () => {
                     return (
                       <div key={index}>
                         <li className="each-comment-section">
-                          <h4>{comment.body}</h4>
-                          <h5>by:{comment.author}</h5>
+                          <h4 id="each-comment-body">{comment.body}</h4>
+                          <h5 id="each-comment-author">by: {comment.author}</h5>
                         </li>
                       </div>
                     );
                   })}
                 </ul>
+                <form onSubmit={HandleSubmit}>
+                  <input
+                    type="text"
+                    placeholder="Type Registered Username"
+                    onChange={handleUsernameInput}
+                    value={userName}
+                  ></input>
+                  <input
+                    id="Comment"
+                    type="text"
+                    placeholder="Type Comment"
+                    onChange={handleCommentInput}
+                    value={comment}
+                  ></input>
+                  <button id="comment_button" type="submit">
+                    Add Comment
+                  </button>
+                </form>
               </>
             ) : (
-              <h3>No Comments (っ °Д °;)っ</h3>
+              <form onSubmit={HandleSubmit}>
+                <h3>No Comments (っ °Д °;)っ</h3>
+                <input
+                  type="text"
+                  placeholder="Type Registered Username"
+                  onChange={handleUsernameInput}
+                  value={userName}
+                ></input>
+                <input
+                  type="text"
+                  id="Comment"
+                  placeholder="Type Comment"
+                  onChange={handleCommentInput}
+                  value={comment}
+                ></input>
+                <button id="comment_button" type="submit">
+                  Add Comment
+                </button>
+              </form>
             )}
-            <form onSubmit={HandleSubmit}>
-              <input
-                type="text"
-                placeholder="username"
-                onChange={handleUsernameInput}
-                value={userName}
-              ></input>
-              <input
-                type="text"
-                placeholder="comment"
-                onChange={handleCommentInput}
-                value={comment}
-              ></input>
-              <button type="submit">add comment</button>
-            </form>
+            <div className="vote-row">
+              <h4>Votes: {votes}</h4>
+              <button id="vote_button" onClick={add}>
+                Upvote
+              </button>
+              <button id="vote_button" onClick={subtarct}>
+                Downvote
+              </button>
+            </div>
           </section>
         )}
       </main>

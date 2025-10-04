@@ -1,0 +1,163 @@
+.individual-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.individual-review-body {
+  background-color: #f3d671;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  font-size: 23px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 23px;
+  margin: 10px;
+}
+
+h4 {
+  font-size: 17px;
+  margin: 10px;
+}
+
+.individual-review-section {
+  background-color: #c4a484;
+  margin: 2vw;
+  padding: 2vw;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+.comment-section {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+}
+
+.each-comment-section {
+  background: antiquewhite;
+  padding: 1vw;
+  margin: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+#each-comment-body {
+  margin: 0px;
+}
+
+#each-comment-author {
+  font-size: 14px;
+}
+
+input {
+  width: 15%;
+  line-height: 40px;
+  padding: 3px;
+  margin: 10px;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+#Comment {
+  width: 30%;
+}
+
+#comment_button {
+  width: 15%;
+  line-height: 40px;
+  background-color: antiquewhite;
+  margin: 10px;
+  padding: 3px;
+}
+
+#comment_button:hover {
+  background-color: #8cff86;
+  transform: scale(1.05);
+}
+
+.vote-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#vote_button {
+  width: 10%;
+  height: 10%;
+  background-color: antiquewhite;
+  margin: 10px;
+}
+
+#vote_button:hover {
+  background-color: #8cff86;
+  transform: scale(1.05);
+}
+
+.individual-review-title {
+  text-align: center;
+}
+
+@media (max-width: 1440px) {
+  input {
+    width: 24%;
+  }
+}
+
+@media (max-width: 1024px) {
+  input {
+    width: 30%;
+  }
+  #Comment {
+    width: 40%;
+  }
+  #comment_button {
+    width: 20%;
+    line-height: 40px;
+  }
+  #vote_button {
+    width: 20%;
+  }
+  .individual-review-title {
+    font-size: 27px;
+  }
+}
+
+@media (max-width: 768px) {
+  input {
+    width: 95%;
+    margin: 10px;
+  }
+  #Comment {
+    width: 95%;
+    margin: 10px;
+  }
+  #comment_button {
+    width: 95%;
+  }
+  .individual-review-body {
+    font-size: 17px;
+  }
+  #vote_button {
+    width: 25%;
+    margin: 7px;
+  }
+}
+
+@media (max-width: 425px) {
+}

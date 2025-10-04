@@ -51,6 +51,16 @@ h4 {
   color: #5c4033;
 }
 
+h5 {
+  font-size: 10px; /* Size of the section content text */
+  line-height: 1.6; /* Line height for better readability */
+  font-family: "Inter", sans-serif; /* Apply the Inter font */
+  letter-spacing: -0.015em; /* Equivalent to tracking-tight */
+  text-decoration: none; /* Ensure no underline on links */
+  font-weight: 400; /* Thin */
+  color: #5c4033;
+}
+
 @media screen and (min-width: 1000px) {
   h1 {
     font-size: 50px;
@@ -75,35 +85,6 @@ h4 {
 }
 h5 {
   font-size: 0.5vw;
-}
-
-.individual-image {
-  width: 30vw;
-  height: 30vw;
-  padding-left: 34vw;
-}
-
-.individual-review-section {
-  background-color: #50d5b3;
-  margin: 10px;
-  padding-left: 1vw;
-  padding-right: 1vw;
-  padding-bottom: 1px;
-}
-.comment-section {
-  display: flex;
-  flex-wrap: wrap;
-  list-style-type: none;
-}
-
-.each-comment-section {
-  background-color: #f3d671;
-  padding: 1vw;
-  margin: 10px;
-}
-
-.individual-review-title {
-  font-size: 2vw;
 }
 
 a:visited {

@@ -58,25 +58,24 @@ const ListOfReviews = () => {
                 <Link to={`/reviews/${review.review_id}`}>
                   <li className="review-section">
                     <img
-                      alt="pic for the game"
                       src={review.review_img_url}
+                      alt="pic for the game"
                       className="list-images"
-                    ></img>
+                    />
                     <div className="review-section-title">
                       <h3>{review.title}</h3>
                     </div>
-                    <h4 class="centered-item">by:{review.owner}</h4>
-                    <h4 class="centered-item">votes:{review.votes}</h4>
-                    <h4 class="centered-item">
-                      date:{new Date(review.created_at).getDate()}
-                      {"/"}
-                      {new Date(review.created_at).getMonth() + 1}
-                      {"/"}
-                      {new Date(review.created_at).getFullYear()}
-                    </h4>
-                    <h4 class="centered-item">
-                      comments:{review.comment_count}
-                    </h4>
+                    <div className="review-section-meta">
+                      <h4>By: {review.owner}</h4>
+                      <h4>
+                        Date: {new Date(review.created_at).getDate()}/
+                        {new Date(review.created_at).getMonth() + 1}/
+                        {new Date(review.created_at).getFullYear()}
+                      </h4>
+                      <h4>Comments: {review.comment_count}</h4>
+                      <h4>Votes: {review.votes}</h4>
+                      <h4>Category: {review.category}</h4>
+                    </div>
                   </li>
                 </Link>
               </div>

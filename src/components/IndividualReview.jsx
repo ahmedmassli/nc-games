@@ -78,11 +78,14 @@ const IndividualReview = () => {
         ) : (
           <section className="individual-review-section">
             <h3 className="individual-review-title">{currentReview.title}</h3>
-            <img
-              className="individual-image"
-              src={currentReview.review_img_url}
-              alt={currentReview.title}
-            ></img>
+            <div id="image_div">
+              <img
+                className="individual-image"
+                src={currentReview.review_img_url}
+                alt={currentReview.title}
+              ></img>
+            </div>
+
             <h3 className="individual-review-body">
               {currentReview.review_body}
             </h3>
@@ -144,10 +147,10 @@ const IndividualReview = () => {
             )}
             <div className="vote-row">
               <h4>Votes: {votes}</h4>
-              <button id="vote_button" onClick={add}>
+              <button className="vote_button" onClick={add}>
                 Upvote
               </button>
-              <button id="vote_button" onClick={subtarct}>
+              <button className="vote_button" onClick={subtarct}>
                 Downvote
               </button>
             </div>

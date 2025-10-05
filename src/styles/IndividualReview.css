@@ -1,12 +1,18 @@
 .individual-image {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+#image_div {
+  padding: 10px;
 }
 
 .individual-review-body {
@@ -61,6 +67,7 @@ h4 {
 
 #each-comment-author {
   font-size: 14px;
+  margin: 0;
 }
 
 input {
@@ -91,20 +98,28 @@ input {
   transform: scale(1.05);
 }
 
+input {
+  border-width: 0;
+}
+
 .vote-row {
   display: flex;
   align-items: center;
   gap: 5px;
 }
 
-#vote_button {
+.vote_button {
   width: 10%;
   height: 10%;
   background-color: antiquewhite;
   margin: 10px;
 }
 
-#vote_button:hover {
+button {
+  border-width: 0;
+}
+
+.vote_button:hover {
   background-color: #8cff86;
   transform: scale(1.05);
 }
@@ -130,7 +145,7 @@ input {
     width: 20%;
     line-height: 40px;
   }
-  #vote_button {
+  .vote_button {
     width: 20%;
   }
   .individual-review-title {
@@ -153,7 +168,7 @@ input {
   .individual-review-body {
     font-size: 17px;
   }
-  #vote_button {
+  .vote_button {
     width: 25%;
     margin: 7px;
   }

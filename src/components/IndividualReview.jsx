@@ -74,7 +74,7 @@ const IndividualReview = () => {
         <h2>Review of board game {currentReview.review_id}</h2>
 
         {isLoadingComments && isLoadingRev ? (
-          <p>Loading...</p>
+          <h1>Loading... ヾ(＠⌒ー⌒＠)ノ</h1>
         ) : (
           <section className="individual-review-section">
             <h3 className="individual-review-title">{currentReview.title}</h3>

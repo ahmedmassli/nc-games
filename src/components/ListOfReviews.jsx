@@ -66,15 +66,15 @@ const ListOfReviews = () => {
                       <h3>{review.title}</h3>
                     </div>
                     <div className="review-section-meta">
-                      <h4>By: {review.owner}</h4>
-                      <h4>
+                      <h4 className="tags">By: {review.owner}</h4>
+                      <h4 className="tags">
                         Date: {new Date(review.created_at).getDate()}/
                         {new Date(review.created_at).getMonth() + 1}/
                         {new Date(review.created_at).getFullYear()}
                       </h4>
-                      <h4>Comments: {review.comment_count}</h4>
-                      <h4>Votes: {review.votes}</h4>
-                      <h4>Category: {review.category}</h4>
+                      <h4 className="tags">Comments: {review.comment_count}</h4>
+                      <h4 className="tags">Votes: {review.votes}</h4>
+                      <h4 className="tags">Category: {review.category}</h4>
                     </div>
                   </li>
                 </Link>

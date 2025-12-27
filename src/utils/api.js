@@ -45,6 +45,26 @@ export const postComment = (username, comment, review_id) => {
     });
 };
 
+export const postRegUser = (username, name, avatar_url) => {
+  return axios
+    .post(`${apiUrl}/api/users`, {
+      username: `${username}`,
+      name: `${name}`,
+      avatar_url: `${avatar_url}`,
+    })
+    .then((success) => {
+      console.log(success);
+    })
+    .catch((error) => {
+      if (error.response.status === 404) {
+        alert(`request failed as username is not recognised`);
+      } else {
+        alert(`request failed`);
+      }
+      console.log(error);
+    });
+};
+
 export const patchVotes = (num, review_id) => {
   return axios
     .patch(`${apiUrl}/api/reviews/${review_id}`, {

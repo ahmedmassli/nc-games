@@ -1,30 +1,44 @@
 select {
+  position: relative;
   display: inline-block;
   background-color: #c4a484;
-  border-color: #c4a484;
   color: #5c4033;
   font-size: 0.875rem;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   padding: 0.625rem;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+select:hover {
+  background-color: #64ff5c;
+  transform: scale(1.05);
 }
 
 .filters {
   display: flex;
-  gap: 1rem; /* space between filters */
-  flex-wrap: wrap; /* stack on small screens */
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .filter {
   display: flex;
   align-items: center;
-  gap: 0.5rem; /* space between label and select */
+  gap: 0.5rem;
 }
 
 button {
   background-color: #c4a484;
   color: #5c4033;
-  border-radius: 0.5rem;
+  outline: 1px solid #5c4033;
+  border-radius: 0.25rem;
   width: 60px;
+}
+
+button:hover {
+  background-color: #64ff5c;
+  transform: scale(1.05);
 }
 
 form {

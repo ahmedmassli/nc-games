@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getReview } from "../utils/api";
 import { getComments } from "../utils/api";
 import { postComment } from "../utils/api";
+import { postRegUser } from "../utils/api";
 import { patchVotes } from "../utils/api";
 import "../styles/IndividualReview.css";
 
@@ -14,6 +15,9 @@ const IndividualReview = () => {
   const [votes, setVotes] = useState(0);
   const [userName, setUserName] = useState("");
   const [comment, setComment] = useState("");
+  const [newUserName, setNewUserName] = useState("");
+  const [newName, setName] = useState("");
+  const [avatarURL, setAvatarURL] = useState("");
 
   const { review_id } = useParams();
 
@@ -42,7 +46,17 @@ const IndividualReview = () => {
     if (userName.length > 0 && comment.length > 0) {
       postComment(userName, comment, review_id);
     } else {
-      alert("please fill in both inputs (●ˇ∀ˇ●)");
+      alert("please fill in all the inputs (●ˇ∀ˇ●)");
+    }
+  };
+
+  const HandleRegSubmit = (event) => {
+    event.preventDefault();
+    if (newUserName.length > 0 && newName.length > 0 && avatarURL.length > 0) {
+      postRegUser(newUserName, newName, avatarURL);
+      alert("thank's for Registring the new user (❁´◡`❁)");
+    } else {
+      alert("please fill in all the inputs (●ˇ∀ˇ●)");
     }
   };
 
@@ -52,6 +66,18 @@ const IndividualReview = () => {
 
   const handleCommentInput = (event) => {
     setComment(event.target.value);
+  };
+
+  const handleNewUsernameInput = (event) => {
+    setNewUserName(event.target.value);
+  };
+
+  const handleNameInput = (event) => {
+    setName(event.target.value);
+  };
+
+  const handleAvatarURLInput = (event) => {
+    setAvatarURL(event.target.value);
   };
 
   const add = () => {
@@ -100,6 +126,11 @@ const IndividualReview = () => {
                         <li className="each-comment-section">
                           <h4 id="each-comment-body">{comment.body}</h4>
                           <h5 id="each-comment-author">by: {comment.author}</h5>
+                          <img
+                            id="each-comment-avatar_url"
+                            src={comment.avatar_url}
+                            alt={"Avatar for commentator"}
+                          ></img>
                         </li>
                       </div>
                     );
@@ -123,27 +154,79 @@ const IndividualReview = () => {
                     Add Comment
                   </button>
                 </form>
+                <form onSubmit={HandleRegSubmit}>
+                  <input
+                    type="text"
+                    placeholder="Type New Username"
+                    onChange={handleNewUsernameInput}
+                    value={newUserName}
+                  ></input>
+                  <input
+                    id="Name"
+                    type="text"
+                    placeholder="Type Name"
+                    onChange={handleNameInput}
+                    value={newName}
+                  ></input>
+                  <input
+                    id="avatarURL"
+                    type="text"
+                    placeholder="Type Avatar URL"
+                    onChange={handleAvatarURLInput}
+                    value={avatarURL}
+                  ></input>
+                  <button id="comment_button" type="submit">
+                    Add New User
+                  </button>
+                </form>
               </>
             ) : (
-              <form onSubmit={HandleSubmit}>
-                <h3>No Comments (っ °Д °;)っ</h3>
-                <input
-                  type="text"
-                  placeholder="Type Registered Username"
-                  onChange={handleUsernameInput}
-                  value={userName}
-                ></input>
-                <input
-                  type="text"
-                  id="Comment"
-                  placeholder="Type Comment"
-                  onChange={handleCommentInput}
-                  value={comment}
-                ></input>
-                <button id="comment_button" type="submit">
-                  Add Comment
-                </button>
-              </form>
+              <>
+                <form onSubmit={HandleSubmit}>
+                  <h3>No Comments (っ °Д °;)っ</h3>
+                  <input
+                    type="text"
+                    placeholder="Type Registered Username"
+                    onChange={handleUsernameInput}
+                    value={userName}
+                  ></input>
+                  <input
+                    type="text"
+                    id="Comment"
+                    placeholder="Type Comment"
+                    onChange={handleCommentInput}
+                    value={comment}
+                  ></input>
+                  <button id="comment_button" type="submit">
+                    Add Comment
+                  </button>
+                </form>
+                <form onSubmit={HandleRegSubmit}>
+                  <input
+                    type="text"
+                    placeholder="Type New Username"
+                    onChange={handleNewUsernameInput}
+                    value={newUserName}
+                  ></input>
+                  <input
+                    id="Name"
+                    type="text"
+                    placeholder="Type Name"
+                    onChange={handleNameInput}
+                    value={newName}
+                  ></input>
+                  <input
+                    id="avatarURL"
+                    type="text"
+                    placeholder="Type Avatar URL"
+                    onChange={handleAvatarURLInput}
+                    value={avatarURL}
+                  ></input>
+                  <button id="comment_button" type="submit">
+                    Add New User
+                  </button>
+                </form>
+              </>
             )}
             <div className="vote-row">
               <h4>Votes: {votes}</h4>

@@ -5,37 +5,38 @@ import "../styles/SortReviews.css";
 const SortReviews = ({ setReviewsDisplayed }) => {
   const navigate = useNavigate();
 
-  const [dropdownCat, setDropDownCat] = useState("");
+  const [category, setCategory] = useState("");
   const [dropdownSort, setDropDownSort] = useState("");
   const [dropdownOrder, setDropDownOrder] = useState("");
 
-  const HandleSelectCat = (event) => setDropDownCat(event.target.value);
-  const HandleSelectSort = (event) => setDropDownSort(event.target.value);
-  const HandleSelectOrder = (event) => setDropDownOrder(event.target.value);
+  const HandleSelectCat = (e) => setCategory(e.target.value);
+  const HandleSelectSort = (e) => setDropDownSort(e.target.value);
+  const HandleSelectOrder = (e) => setDropDownOrder(e.target.value);
 
-  const onsubmit = (event) => {
-    event.preventDefault();
-    setReviewsDisplayed(dropdownCat);
+  const onsubmit = (e) => {
+    e.preventDefault();
+    setReviewsDisplayed(category);
 
-    if (!dropdownCat) {
+    if (!category) {
       navigate(`/`);
     } else if (!dropdownSort) {
-      navigate(`/?category=${dropdownCat}`);
+      navigate(`/?category=${category}`);
     } else if (!dropdownOrder) {
-      navigate(`/?category=${dropdownCat}&sort_by=${dropdownSort}`);
+      navigate(`/?category=${category}&sort_by=${dropdownSort}`);
     } else {
       navigate(
-        `/?category=${dropdownCat}&sort_by=${dropdownSort}&order=${dropdownOrder}`
+        `/?category=${category}&sort_by=${dropdownSort}&order=${dropdownOrder}`
       );
     }
   };
 
   return (
     <form className="filters" onSubmit={onsubmit}>
+      {/* CATEGORY */}
       <div className="filters">
-        <select onChange={HandleSelectCat}>
-          <option value="" disabled selected>
-            Select Category
+        <select value={category} onChange={HandleSelectCat}>
+          <option value="" disabled hidden>
+            Select Category ▾
           </option>
           <option value="All">All</option>
           <option value="hidden-roles">Hidden Roles</option>
@@ -48,10 +49,11 @@ const SortReviews = ({ setReviewsDisplayed }) => {
         </select>
       </div>
 
+      {/* SORT BY */}
       <div className="filters">
-        <select id="sort_by" onChange={HandleSelectSort}>
-          <option value="" disabled selected>
-            Select Sort by
+        <select value={dropdownSort} onChange={HandleSelectSort}>
+          <option value="" disabled hidden>
+            Select Sort by ▾
           </option>
           <option value="created_at">Date</option>
           <option value="comment_count">Comment Count</option>
@@ -59,10 +61,11 @@ const SortReviews = ({ setReviewsDisplayed }) => {
         </select>
       </div>
 
+      {/* ORDER */}
       <div className="filters">
-        <select id="order" onChange={HandleSelectOrder}>
-          <option value="" disabled selected>
-            Select Order
+        <select value={dropdownOrder} onChange={HandleSelectOrder}>
+          <option value="" disabled hidden>
+            Select Order ▾
           </option>
           <option value="ASC">Ascending</option>
           <option value="DESC">Descending</option>

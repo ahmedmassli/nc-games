@@ -9,6 +9,7 @@ h2 {
   max-height: 200px;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
+  box-shadow: 0 10px 20px rgba(90, 60, 30, 0.35);
 }
 
 .review-section-list {

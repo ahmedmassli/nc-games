@@ -192,6 +192,10 @@ const IndividualReview = () => {
                     );
                   })}
                 </ul>
+                </>
+                ): (
+                  <h3 className="no-comments">No Comments (っ °Д °;)っ</h3>
+                )}
                 <div className="comment-user-layout">
                   <form onSubmit={HandleSubmit} className="comment-form">
                     <div class="ui input" bis_skin_checked="1">
@@ -246,61 +250,7 @@ const IndividualReview = () => {
                     </button>
                   </form>
                 </div>  
-              </>
-            ) : (
-              <>
-              <div className="comment-user-layout">
-                <form onSubmit={HandleSubmit} className="comment-form">
-                  <h3>No Comments (っ °Д °;)っ</h3>
-                  <div class="ui input" bis_skin_checked="1">
-                  <input
-                    type="text"
-                    placeholder="Type Registered Username"
-                    onChange={handleUsernameInput}
-                    value={userName}
-                  ></input>
-                  </div>  
-                  <div class="ui input" bis_skin_checked="1">
-                  <input
-                    type="text"
-                    id="Comment"
-                    placeholder="Type Comment"
-                    onChange={handleCommentInput}
-                    value={comment}
-                  ></input>
-                  </div>  
-                  <button className="ui button" type="submit">
-                    Add Comment
-                  </button>
-                </form>
-                <form onSubmit={HandleRegSubmit} className="register-user-form">
-                  <input
-                    type="text"
-                    placeholder="Type New Username"
-                    onChange={handleNewUsernameInput}
-                    value={newUserName}
-                  ></input>
-                  <input
-                    id="Name"
-                    type="text"
-                    placeholder="Type Name"
-                    onChange={handleNameInput}
-                    value={newName}
-                  ></input>
-                  <input
-                    id="avatarURL"
-                    type="text"
-                    placeholder="Type Avatar URL"
-                    onChange={handleAvatarURLInput}
-                    value={avatarURL}
-                  ></input>
-                  <button className="ui button" type="submit">
-                    Add New User
-                  </button>
-                </form>
-              </div>  
-              </>
-            )}
+
 
           </section>
         )}

@@ -1,78 +1,106 @@
-import { useState } from "react";
+import { useEffect ,useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/SortReviews.css";
 
-const SortReviews = ({ setReviewsDisplayed }) => {
+const SortReviews = ({ isLoading, setIsLoading  }) => {
   const navigate = useNavigate();
 
-  const [category, setCategory] = useState("");
-  const [dropdownSort, setDropDownSort] = useState("");
-  const [dropdownOrder, setDropDownOrder] = useState("");
+  const [dropdownCategory, setDropDownCategory] = useState("All");
+  const [dropdownSort, setDropDownSort] = useState("created_at");
+  const [dropdownOrder, setDropDownOrder] = useState("ASC");
 
-  const HandleSelectCat = (e) => setCategory(e.target.value);
-  const HandleSelectSort = (e) => setDropDownSort(e.target.value);
-  const HandleSelectOrder = (e) => setDropDownOrder(e.target.value);
+  useEffect(() => {
+  window.$("#category-dropdown").dropdown({
+    onChange: (value) => {
+      setDropDownCategory(value);
+    },
+  });
+}, []);
+
+
+  useEffect(() => {
+  window.$("#sort-dropdown").dropdown({
+    onChange: (value) => {
+      setDropDownSort(value);
+    },
+  });
+}, []);
+
+  useEffect(() => {
+  window.$("#order-dropdown").dropdown({
+    onChange: (value) => {
+      setDropDownOrder(value);
+    },
+  });
+}, []);
 
   const onsubmit = (e) => {
     e.preventDefault();
-    setReviewsDisplayed(category);
-
-    if (!category) {
+    setIsLoading(true);
+    if (!dropdownCategory) {
       navigate(`/`);
     } else if (!dropdownSort) {
-      navigate(`/?category=${category}`);
+      navigate(`/?category=${dropdownCategory}`);
     } else if (!dropdownOrder) {
-      navigate(`/?category=${category}&sort_by=${dropdownSort}`);
+      navigate(`/?category=${dropdownCategory}&sort_by=${dropdownSort}`);
     } else {
       navigate(
-        `/?category=${category}&sort_by=${dropdownSort}&order=${dropdownOrder}`
+        `/?category=${dropdownCategory}&sort_by=${dropdownSort}&order=${dropdownOrder}`
       );
     }
   };
 
   return (
     <form className="filters" onSubmit={onsubmit}>
-      {/* CATEGORY */}
       <div className="filters">
-        <select value={category} onChange={HandleSelectCat}>
-          <option value="" disabled hidden>
-            Select Category ▾
-          </option>
-          <option value="All">All</option>
-          <option value="hidden-roles">Hidden Roles</option>
-          <option value="dexterity">Dexterity</option>
-          <option value="strategy">Strategy</option>
-          <option value="deck-building">Deck-Building</option>
-          <option value="engine-building">Engine-Building</option>
-          <option value="push-your-luck">Push Your Luck</option>
-          <option value="roll-and-write">Roll & Write</option>
-        </select>
+          <div className="ui selection dropdown" id="category-dropdown">
+            <input type="hidden" value={dropdownCategory} />
+            <i className="dropdown icon"></i>
+            <div className="default text">Select Category</div>
+            <div className="menu">
+              <div className="item" data-value="All">All</div>
+              <div className="item" data-value="hidden-roles">Hidden Roles</div>
+              <div className="item" data-value="dexterity">Dexterity</div>
+              <div className="item" data-value="strategy">Strategy</div>
+              <div className="item" data-value="deck-building">Deck-Building</div>
+              <div className="item" data-value="engine-building">Engine-Building</div>
+              <div className="item" data-value="push-your-luck">Push Your Luck</div>
+              <div className="item" data-value="roll-and-write">Roll & Write</div>
+            </div>
+          </div>
       </div>
 
-      {/* SORT BY */}
       <div className="filters">
-        <select value={dropdownSort} onChange={HandleSelectSort}>
-          <option value="" disabled hidden>
-            Select Sort by ▾
-          </option>
-          <option value="created_at">Date</option>
-          <option value="comment_count">Comment Count</option>
-          <option value="votes">Votes</option>
-        </select>
+        <div className="ui selection dropdown" id="sort-dropdown">
+          <input type="hidden" value={dropdownSort} />
+          <i className="dropdown icon"></i>
+          <div className="default text">Select Sort by</div>
+          <div className="menu">
+            <div className="item" data-value="created_at">Date</div>
+            <div className="item" data-value="comment_count">Comment Count</div>
+            <div className="item" data-value="votes">Votes</div>
+          </div>
+        </div>
       </div>
 
-      {/* ORDER */}
       <div className="filters">
-        <select value={dropdownOrder} onChange={HandleSelectOrder}>
-          <option value="" disabled hidden>
-            Select Order ▾
-          </option>
-          <option value="ASC">Ascending</option>
-          <option value="DESC">Descending</option>
-        </select>
+        <div className="ui selection dropdown" id="order-dropdown">
+          <input type="hidden" value={dropdownOrder} />
+          <i className="dropdown icon"></i>
+          <div className="default text">Select Order by</div>
+          <div className="menu">
+          	<div className="item" data-value="ASC">Ascending</div>
+          	<div className="item" data-value="DESC">Descending</div>
+          </div>
+        </div>
       </div>
-
-      <button type="submit">Apply</button>
+      <button
+        type="submit"
+        className={`ui button ${isLoading ? "loading" : ""}`}
+        disabled={isLoading}
+      >
+        {isLoading ? "Loading" : "Apply"}
+      </button>
     </form>
   );
 };

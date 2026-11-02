@@ -4,15 +4,24 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import $ from "jquery";
+import "./assets/Semantic-UI-master/dist/semantic.min.css";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-);
+window.$ = $;
+window.jQuery = $;
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const script = document.createElement("script");
+script.src = "/semantic.min.js";
+document.body.appendChild(script);
+
+script.onload = () => {
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+
+  root.render(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
+
+  reportWebVitals();
+};

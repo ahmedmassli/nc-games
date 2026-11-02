@@ -5,9 +5,10 @@ import { useParams } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import { getReviewsBySP } from "../utils/api";
 import "../styles/ListOfReviews.css";
+import "../assets/Semantic-UI-master/dist/semantic.min.css";
 
-const ListOfReviews = () => {
-  const [isLoading, setIsLoading] = useState(true);
+
+const ListOfReviews = ({ isLoading, setIsLoading  }) => {
   const [reviews, setReviews] = useState([]);
   const { category_name } = useParams();
   /* eslint-disable no-unused-vars */
@@ -18,6 +19,7 @@ const ListOfReviews = () => {
   let sort_by = searchParams.get("sort_by");
 
   useEffect(() => {
+    setIsLoading(true)
     if (category) {
       getReviewsBySP(category, sort_by, order).then((rdata) => {
         setReviews(rdata.data.revData);
@@ -29,9 +31,10 @@ const ListOfReviews = () => {
         setIsLoading(false);
       });
     }
-  }, [category, sort_by, order]);
+  }, [category, sort_by, order,setIsLoading]);
 
   useEffect(() => {
+    setIsLoading(true)
     if (!category_name) {
       getReviews().then((reviewdata) => {
         setReviews(reviewdata);
@@ -43,7 +46,7 @@ const ListOfReviews = () => {
         setIsLoading(false);
       });
     }
-  }, [category_name]);
+  }, [category_name,setIsLoading]);
 
   return (
     <main>

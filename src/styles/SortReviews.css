@@ -1,23 +1,12 @@
-select {
-  position: relative;
-  display: inline-block;
-  background-color: #c4a484;
-  color: #5c4033;
-  font-size: 0.875rem;
-  border-radius: 0.25rem;
-  padding: 0.625rem;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
 
-select:hover {
-  background-color: #64ff5c;
-  transform: scale(1.05);
-}
+
+
+
 
 .filters {
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
   flex-wrap: wrap;
 }
@@ -28,19 +17,64 @@ select:hover {
   gap: 0.5rem;
 }
 
-button {
+/* Semantic UI Order dropdown */
+.filters .ui.selection.dropdown {
+  min-width: 180px;
   background-color: #c4a484;
   color: #5c4033;
-  outline: 1px solid #5c4033;
+  border: 1px solid #5c4033;
   border-radius: 0.25rem;
-  width: 60px;
+  transition: transform 0.2s ease;
 }
 
-button:hover {
-  background-color: #64ff5c;
-  transform: scale(1.05);
+.filters .ui.selection.dropdown:hover {
+  background-color:  #8cff86;
 }
 
-form {
+.filters .ui.selection.dropdown .menu {
+  background-color: #fffaf3;
+  border-color: #c4a484;
+}
+
+.filters .ui.selection.dropdown .menu > .item {
+  color: #5c4033;
+}
+
+.filters .ui.selection.dropdown .menu > .item:hover {
+  background-color: #e9d8c5;
+}
+
+.filters > .ui.button {
+  background-color: #c4a484;
+  color: #5c4033;
+  border: 1px solid #5c4033;
+  height: 37px;
+  box-sizing: border-box;
+  border-radius: 0.25rem;
+  padding: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+    display: flex;
+  align-items: center;
   justify-content: center;
+  height: inherit;
+  text-align: center;
+}
+
+.filters .ui.button {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+
+}
+
+.ui.button:hover {
+  background-color:  #8cff86;
+}
+
+
+.filters > .ui.button.loading {
+    height: 37px;
+
 }

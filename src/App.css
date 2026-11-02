@@ -1,8 +1,11 @@
-html {
-  /* background-image: url("./assets/pictures/cartoon-color-board-games-different.webp");
-  background-size: 800px 500px; */
-  background-color: antiquewhite;
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+  background-color: #f5f0e8;
 }
+
 
 h1 {
   cursor: pointer;

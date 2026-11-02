@@ -1,5 +1,6 @@
 .custom-heading-h1 {
   font-size: 50px;
+  margin-top: 80px;
   font-family: "Inter", sans-serif;
   letter-spacing: -0.015em;
   text-decoration: none;
@@ -8,5 +9,5 @@
 
 .custom-heading-h1:hover {
   color: #64ff5c;
-  font-size: 55px;
+  transform: scale(1.1);
 }

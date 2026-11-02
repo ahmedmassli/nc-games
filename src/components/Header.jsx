@@ -5,8 +5,8 @@ const Header = () => {
   return (
     <section>
       <h1>
-        <Link className="custom-heading-h1" to="/">
-          NC Game
+        <Link  to="/">
+          <h1 className="custom-heading-h1">NC Games</h1>
         </Link>
       </h1>
     </section>

@@ -18,6 +18,7 @@ const IndividualReview = () => {
   const [newUserName, setNewUserName] = useState("");
   const [newName, setName] = useState("");
   const [avatarURL, setAvatarURL] = useState("");
+  const [current, setCurrent] = useState(0);
 
   const { review_id } = useParams();
 
@@ -33,28 +34,71 @@ const IndividualReview = () => {
     getComments(review_id).then((comData) => {
       setCurrentReviewComments(comData);
       setIsLoadingComments(false);
-      console.log(12);
     });
   }, [review_id]);
 
+  useEffect(() => {
+    if (currentReviewComments.length < 2) return;
+    const id = setInterval(() => setCurrent((c) => (c + 1) % currentReviewComments.length), 6000);
+    return () => clearInterval(id);
+  }, [currentReviewComments.length]);
+
   const HandleSubmit = (event) => {
     event.preventDefault();
-    setCurrentReviewComments((currentReviewComments) => [
+    if (userName.length > 0 && comment.length > 0) {
+          setCurrentReviewComments((currentReviewComments) => [
       ...currentReviewComments,
       { body: comment, author: userName },
-    ]);
-    if (userName.length > 0 && comment.length > 0) {
+      ]);
       postComment(userName, comment, review_id);
+      setUserName("");
+      setComment("");
     } else {
-      alert("please fill in all the inputs (●ˇ∀ˇ●)");
+      if (userName.length === 0 && comment.length === 0) {
+        alert("please fill in both the username and comment (●ˇ∀ˇ●)");
+      } else if (userName.length === 0) {
+        alert("please fill in the username entry (●ˇ∀ˇ●)");
+      } else {
+        alert("please fill in the comment entry (●ˇ∀ˇ●)");
+      }
     }
+};
+
+  const checkImageURL = (url) => {
+    return new Promise((resolve) => {
+      const image = new Image();
+
+      image.onload = () => resolve(true);
+      image.onerror = () => resolve(false);
+
+      image.src = url;
+    });
   };
 
-  const HandleRegSubmit = (event) => {
+  const HandleRegSubmit = async (event) => {
     event.preventDefault();
-    if (newUserName.length > 0 && newName.length > 0 && avatarURL.length > 0) {
-      postRegUser(newUserName, newName, avatarURL);
-      alert("thank's for Registring the new user (❁´◡`❁)");
+    if (newUserName.trim().length > 0 && newName.trim().length > 0 && avatarURL.trim().length > 0) {
+
+      const trimmedAvatarURL = avatarURL.trim();
+      const isImageValid = await checkImageURL(trimmedAvatarURL);
+
+      if (!isImageValid) {
+      alert("Please enter a working image URL.");
+      return;}
+
+  try {
+    await postRegUser(
+      newUserName.trim(),
+      newName.trim(),
+      trimmedAvatarURL
+    );
+
+    alert("Thanks for registering the new user (❁´◡`❁)");
+  } catch (error) {
+    alert("Registration failed. Please try again.");
+  }
+    
+    
     } else {
       alert("please fill in all the inputs (●ˇ∀ˇ●)");
     }
@@ -97,7 +141,6 @@ const IndividualReview = () => {
   } else {
     return (
       <main>
-        <h2>Review of board game {currentReview.review_id}</h2>
 
         {isLoadingComments && isLoadingRev ? (
           <h1>Loading... ヾ(＠⌒ー⌒＠)ノ</h1>
@@ -112,20 +155,33 @@ const IndividualReview = () => {
               ></img>
             </div>
 
-            <h3 className="individual-review-body">
+            <h4 className="individual-review-body">
               {currentReview.review_body}
-            </h3>
+            </h4>
+
+            <div className="vote-row">
+              <h4>Votes: {votes}</h4>
+              <div className="vote-buttons">
+              <button className="ui button" onClick={add}>
+                Upvote
+              </button>
+
+              <button className="ui button" onClick={subtarct}>
+                Downvote
+              </button>
+              </div>
+            </div>
 
             {currentReviewComments.length ? (
               <>
-                <h3>Comments</h3>
+                <h3>{currentReviewComments.length < 2 ? "Comment" : "Comments"}</h3>
                 <ul className="comment-section">
                   {currentReviewComments.map((comment, index) => {
                     return (
-                      <div key={index}>
+                      <div key={index}  className={index === current ? "comment-slide comment-slide-on" : "comment-slide"} >
                         <li className="each-comment-section">
                           <h4 id="each-comment-body">{comment.body}</h4>
-                          <h5 id="each-comment-author">by: {comment.author}</h5>
+                          <h5 id="each-comment-author">{comment.author}</h5>
                           <img
                             id="each-comment-avatar_url"
                             src={comment.avatar_url}
@@ -136,60 +192,75 @@ const IndividualReview = () => {
                     );
                   })}
                 </ul>
-                <form onSubmit={HandleSubmit}>
-                  <input
-                    type="text"
-                    placeholder="Type Registered Username"
-                    onChange={handleUsernameInput}
-                    value={userName}
-                  ></input>
-                  <input
-                    id="Comment"
-                    type="text"
-                    placeholder="Type Comment"
-                    onChange={handleCommentInput}
-                    value={comment}
-                  ></input>
-                  <button id="comment_button" type="submit">
-                    Add Comment
-                  </button>
-                </form>
-                <form onSubmit={HandleRegSubmit}>
-                  <input
-                    type="text"
-                    placeholder="Type New Username"
-                    onChange={handleNewUsernameInput}
-                    value={newUserName}
-                  ></input>
-                  <input
-                    id="Name"
-                    type="text"
-                    placeholder="Type Name"
-                    onChange={handleNameInput}
-                    value={newName}
-                  ></input>
-                  <input
-                    id="avatarURL"
-                    type="text"
-                    placeholder="Type Avatar URL"
-                    onChange={handleAvatarURLInput}
-                    value={avatarURL}
-                  ></input>
-                  <button id="comment_button" type="submit">
-                    Add New User
-                  </button>
-                </form>
+                <div className="comment-user-layout">
+                  <form onSubmit={HandleSubmit} className="comment-form">
+                    <div class="ui input" bis_skin_checked="1">
+                    <input
+                      type="text"
+                      placeholder="Type Registered Username"
+                      onChange={handleUsernameInput}
+                      value={userName}
+                    ></input>
+                    </div>
+                    <div class="ui input" bis_skin_checked="1">
+                    <textarea
+                      className="comment-textarea"
+                      placeholder="Type Comment"
+                      onChange={handleCommentInput}
+                      value={comment}
+                    ></textarea>  
+                    </div>
+                    <button className="ui button" type="submit">
+                      Add Comment
+                    </button>
+                  </form>
+                  <form onSubmit={HandleRegSubmit} className="register-user-form">
+                    <div class="ui input" bis_skin_checked="1">
+                    <input
+                      type="text"
+                      placeholder="Type New Username"
+                      onChange={handleNewUsernameInput}
+                      value={newUserName}
+                    ></input>
+                    </div>
+                    <div class="ui input" bis_skin_checked="1">
+                    <input
+                      id="Name"
+                      type="text"
+                      placeholder="Type Name"
+                      onChange={handleNameInput}
+                      value={newName}
+                    ></input>
+                    </div>
+                    <div class="ui input" bis_skin_checked="1">
+                    <input
+                      id="avatarURL"
+                      type="text"
+                      placeholder="Type Avatar URL"
+                      onChange={handleAvatarURLInput}
+                      value={avatarURL}
+                    ></input>
+                    </div>
+                    <button className="ui button" type="submit">
+                      Add New User
+                    </button>
+                  </form>
+                </div>  
               </>
             ) : (
               <>
-                <form onSubmit={HandleSubmit}>
+              <div className="comment-user-layout">
+                <form onSubmit={HandleSubmit} className="comment-form">
                   <h3>No Comments (っ °Д °;)っ</h3>
+                  <div class="ui input" bis_skin_checked="1">
                   <input
                     type="text"
                     placeholder="Type Registered Username"
                     onChange={handleUsernameInput}
                     value={userName}
                   ></input>
+                  </div>  
+                  <div class="ui input" bis_skin_checked="1">
                   <input
                     type="text"
                     id="Comment"
@@ -197,11 +268,12 @@ const IndividualReview = () => {
                     onChange={handleCommentInput}
                     value={comment}
                   ></input>
-                  <button id="comment_button" type="submit">
+                  </div>  
+                  <button className="ui button" type="submit">
                     Add Comment
                   </button>
                 </form>
-                <form onSubmit={HandleRegSubmit}>
+                <form onSubmit={HandleRegSubmit} className="register-user-form">
                   <input
                     type="text"
                     placeholder="Type New Username"
@@ -222,21 +294,14 @@ const IndividualReview = () => {
                     onChange={handleAvatarURLInput}
                     value={avatarURL}
                   ></input>
-                  <button id="comment_button" type="submit">
+                  <button className="ui button" type="submit">
                     Add New User
                   </button>
                 </form>
+              </div>  
               </>
             )}
-            <div className="vote-row">
-              <h4>Votes: {votes}</h4>
-              <button className="vote_button" onClick={add}>
-                Upvote
-              </button>
-              <button className="vote_button" onClick={subtarct}>
-                Downvote
-              </button>
-            </div>
+
           </section>
         )}
       </main>

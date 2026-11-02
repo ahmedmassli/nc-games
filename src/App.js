@@ -8,19 +8,32 @@ import NotFound from "./components/NotFound";
 import SortReviews from "./components/SortReviews";
 
 function App() {
-  const [reviewsDisplayed, setReviewsDisplayed] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <div className="App">
       <Header />
-      <SortReviews setReviewsDisplayed={setReviewsDisplayed} />
       <Routes>
         <Route
           path="/"
-          reviewsDisplayed={reviewsDisplayed}
-          element={<ListOfReviews />}
+          element={            <>
+              <SortReviews
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+              />
+              <ListOfReviews
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+              />
+            </>}
         />
-        <Route path="/category/:category_name" element={<ListOfReviews />} />
+        <Route path="/category/:category_name" element={ <>
+          <SortReviews 
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}/>
+          <ListOfReviews 
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}/> </>} />
         <Route path="/reviews/:review_id" element={<IndividualReview />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

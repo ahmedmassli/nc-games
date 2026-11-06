@@ -95,6 +95,29 @@ ul {
   font-size: 15px;
 }
 
+
+@media (min-width: 2560px) {
+  .review-section-title h3 {
+    font-size: 40px;
+  }
+  .review-section{
+    max-height: 1000px;
+    max-width: 300px;
+    height: 600px;
+    width: 300px;
+  }
+
+  .tags {
+    font-size: 30px;
+}
+
+.list-images {
+    width: 11vw;
+    height: auto;
+    max-width: 300px;
+}
+}
+
 @media (max-width: 1440px) {
   h3 {
     font-size: 18px;

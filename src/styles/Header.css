@@ -11,3 +11,26 @@
   color: #64ff5c;
   transform: scale(1.1);
 }
+
+@media (min-width: 2560px) {
+.custom-heading-h1 {
+  font-size: 100px;
+}
+}
+
+@media (max-width: 1024px) {
+.custom-heading-h1 {
+  font-size: 50px;
+}
+}
+
+@media (max-width: 768px) {
+
+}
+
+@media (max-width: 425px) {
+.custom-heading-h1 {
+  font-size: 40px;
+}
+}
+
